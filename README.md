@@ -13,8 +13,7 @@ This project focuses on analyzing a ticketing system dataset using **Advanced SQ
 1. **Identify Bottlenecks in Ticket Resolution by Priority**
    - Analyze average resolution times by category and priority (P1–P4)
    - Suggest improvements to enhance SLA adherence
-
-![image](https://github.com/user-attachments/assets/835394e4-1aac-459d-a78d-470cd855f102)
+ ![image](https://github.com/user-attachments/assets/835394e4-1aac-459d-a78d-470cd855f102)
 
 
 2. **Employee Performance Dashboard**
