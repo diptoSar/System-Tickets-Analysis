@@ -1,10 +1,10 @@
 # System-Tickets-Analysis
 
-# 🎟️ Ticketing System Analysis & Performance Dashboard
+# 🎟️ Ticketing System Analysis 
 
 ## 📊 Project Overview
 
-This project focuses on analyzing a ticketing system dataset using **Advanced SQL**, **DAX**, and **Power BI** to uncover operational bottlenecks, track team performance, and support business decision-making with interactive dashboards.
+This project focuses on analyzing a ticketing system dataset using **Advanced SQL** to uncover operational bottlenecks, track team performance, and support business decision-making with interactive dashboards.
 
 ---
 
