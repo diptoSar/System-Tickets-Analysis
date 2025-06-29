@@ -1,1 +1,69 @@
 
+
+
+--Problem Statement:
+--Analyze the average time taken to resolve tickets across different priorities (P1–P4) and categories
+--to uncover bottlenecks and suggest improvements in SLA adherence.
+
+
+select ticket_category,
+
+round(avg(p1_time_taken),2) avg_time_p1_solved,
+
+round(avg(p2_time_taken),2) avg_time_p2_solved,
+
+round(avg(p3_time_taken),2) avg_time_p3_solved,
+
+round(avg(p4_time_taken),2) avg_time_p4_solved
+from ticket
+WHERE Ticket_Status = 'Closed'
+group by ticket_category
+
+--Problem Statement:
+--Track the number of tickets resolved by each employee, 
+--along with the average time taken, to identify top performers and those needing support.
+
+select employee_name,sum(p1_resolved+p2_resolved+p3_resolved+p4_resolved) total_cases_solved,
+ round(avg(p1_time_taken+p2_time_taken+p3_time_taken+p4_time_taken),2) Avg_Resolution_Time
+from ticket
+WHERE Ticket_Status = 'Closed'
+group by employee_name
+having sum(p1_resolved+p2_resolved+p3_resolved+p4_resolved) >0
+order by Avg_Resolution_Time desc
+
+--Problem Statement:
+--Monitor ticket inflow vs. resolution rate over time to detect seasonal trends or periods of backlog.
+
+
+with MonthlyReceived AS(
+select FORMAT(Received_Date, 'yyyy-MM') as Month,
+count(*) as total_ticket_received
+from ticket
+group by FORMAT(Received_Date, 'yyyy-MM')
+),
+monthlyresolved as (
+select FORMAT(Resolve_date, 'yyyy-MM') as Month,
+count(*) as total_ticket_resolved
+from ticket 
+where FORMAT(Resolve_date, 'yyyy-MM') is not null
+group by FORMAT(Resolve_date, 'yyyy-MM')
+)
+select r.total_ticket_received,
+ISNULL(res.total_ticket_resolved,0),
+round(cast(isnull(total_ticket_resolved,0) as float)/(total_ticket_received)*100,2) as Resolution_Rate_Percent,
+(total_ticket_received-isnull(total_ticket_resolved,0)) as Backlog
+
+from MonthlyReceived r
+left join monthlyresolved res
+on r.Month=res.month
+order by r.month
+
+--Problem Statement:
+--Determine which ticket categories have the highest frequency and 
+--slowest resolution times to prioritize process improvements.
+
+select Ticket_category, count(*) count_of_tickets, avg(DATEDIFF(hour,Received_date,resolve_date)) Avg_Resolution_hours
+from ticket
+where resolve_date is not null
+group by Ticket_category
+order by count_of_tickets desc, Avg_Resolution_hours desc
