@@ -14,6 +14,10 @@ This project focuses on analyzing a ticketing system dataset using **Advanced SQ
    - Analyze average resolution times by category and priority (P1–P4)
    - Suggest improvements to enhance SLA adherence
 
+![image](https://github.com/user-attachments/assets/28b564be-7d3c-4ba3-87d4-13150abfcc18)
+![image](https://github.com/user-attachments/assets/bfe0ee18-53e2-4c9f-bc5c-91d64b4f4ee8)
+
+
 2. **Employee Performance Dashboard**
    - Track tickets resolved per employee and average resolution time
    - Create a Top 5 leaderboard using DAX (`RANKX`)
